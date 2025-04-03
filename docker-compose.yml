@@ -1,0 +1,34 @@
+services:
+  proxy-manager:
+    image: jc21/nginx-proxy-manager:2
+    container_name: proxy-manager
+    restart: unless-stopped
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '22:22' # SSH
+      # - '25:25'
+
+    environment:
+      # Uncomment this if you want to change the location of
+      # the SQLite DB file within the container
+      # DB_SQLITE_FILE: "/data/database.sqlite"
+      PUID: 1000
+      PGID: 1000
+
+      # Uncomment this if IPv6 is not enabled on your host
+      DISABLE_IPV6: 'true'
+
+    networks:
+      - frontend
+
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+
+networks:
+  frontend:
+    external: true
