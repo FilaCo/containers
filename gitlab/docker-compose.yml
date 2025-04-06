@@ -1,0 +1,23 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:17.10.3-ce.0
+    container_name: gitlab
+    restart: unless-stopped
+    hostname: 'git.filaco.dev'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        # Add any other gitlab.rb configuration here, each on its own line
+        external_url 'https://git.filaco.dev'
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+    networks:
+      - frontend
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    shm_size: '256m'
+
+networks:
+  frontend:
+    external: true
