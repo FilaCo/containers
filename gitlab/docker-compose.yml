@@ -18,6 +18,14 @@ services:
       - '$GITLAB_HOME/logs:/var/log/gitlab'
       - '$GITLAB_HOME/data:/var/opt/gitlab'
     shm_size: '256m'
+  
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine3.21
+    container_name: gitlab-runner
+    restart: unless-stopped
+    volumes:
+      - '$GITLAB_RUNNER_HOME/config:/etc/gitlab-runner'
+      - '/var/run/docker.sock:/var/run/docker.sock'
 
 networks:
   frontend:
