@@ -1,6 +1,6 @@
 services:
   gitlab:
-    image: gitlab/gitlab-ce:17.10.3-ce.0
+    image: gitlab/gitlab-ce:latest
     container_name: gitlab
     restart: unless-stopped
     hostname: 'git.filaco.dev'
@@ -20,7 +20,7 @@ services:
     shm_size: '256m'
   
   gitlab-runner:
-    image: gitlab/gitlab-runner:alpine3.21
+    image: gitlab/gitlab-runner:latest
     container_name: gitlab-runner
     restart: unless-stopped
     volumes:
