@@ -1,0 +1,24 @@
+services:
+  ollama:
+    container_name: ollama
+    image: ollama/ollama:rocm
+    restart: unless-stopped
+    networks:
+      - frontend
+    group_add:
+      - 985 # video
+      - 989 # render
+    devices:
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
+    volumes:
+      - "$OLLAMA_HOME:/root/.ollama"
+    environment:
+      HSA_OVERRIDE_GFX_VERSION: 11.0.2
+      #AMD_LOG_LEVEL: 3
+      #OLLAMA_DEBUG: 1
+      OLLAMA_CONTEXT_LENGTH: 128000
+
+networks:
+  frontend:
+    external: true

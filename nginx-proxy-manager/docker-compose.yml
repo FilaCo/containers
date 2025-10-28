@@ -1,6 +1,6 @@
 services:
   proxy-manager:
-    image: jc21/nginx-proxy-manager:2
+    image: jc21/nginx-proxy-manager:latest
     container_name: proxy-manager
     restart: unless-stopped
     ports:
@@ -22,11 +22,11 @@ services:
       DISABLE_IPV6: 'true'
 
     networks:
-      - frontend
+      frontend:
 
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - $NGINX_PROXY_MANAGER_HOME/data:/data
+      - $NGINX_PROXY_MANAGER_HOME/letsencrypt:/etc/letsencrypt
 
     healthcheck:
       test: [ "CMD", "/usr/bin/check-health" ]

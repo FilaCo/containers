@@ -16,5 +16,6 @@ services:
       TZ: 'Europe/Moscow'
       DIFFICULTY: '3'
       LEVEL: 'filaco-world'
+      VIEW_DISTANCE: "15"
     volumes:
       - ./data:/data
