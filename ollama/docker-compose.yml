@@ -17,8 +17,9 @@ services:
       HSA_OVERRIDE_GFX_VERSION: 11.0.2
       # AMD_LOG_LEVEL: 3
       # OLLAMA_DEBUG: 1
-      OLLAMA_CONTEXT_LENGTH: 40000
-      OLLAMA_KEEP_ALIVE: -1
+      OLLAMA_CONTEXT_LENGTH: 64000
+      # OLLAMA_KEEP_ALIVE: -1
+      OLLAMA_MAX_LOADED_MODELS: 1
 
   # TODO: remove it when desktop app is ready
   openwebui:
