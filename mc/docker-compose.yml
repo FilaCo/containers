@@ -6,16 +6,16 @@ services:
     stdin_open: true
     restart: unless-stopped
     ports:
-      - '25565:25565'
+      - "25565:25565"
     environment:
-      EULA: 'TRUE'
-      ONLINE_MODE: 'false'
-      MEMORY: '8192M'
-      MAX_PLAYERS: '10'
+      EULA: "TRUE"
+      ONLINE_MODE: "true"
+      MEMORY: "8192M"
+      MAX_PLAYERS: "10"
       MOTD: "FilaCo's Minecraft Server"
-      TZ: 'Europe/Moscow'
-      DIFFICULTY: '3'
-      LEVEL: 'filaco-world'
+      TZ: "Europe/Moscow"
+      DIFFICULTY: "2"
+      LEVEL: "filaco-world"
       VIEW_DISTANCE: "15"
     volumes:
-      - ./data:/data
+      - $MINECRAFT_HOME/data:/data
