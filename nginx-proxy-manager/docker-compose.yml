@@ -1,38 +1,37 @@
 services:
-  proxy-manager:
-    image: jc21/nginx-proxy-manager:latest
-    container_name: proxy-manager
-    restart: unless-stopped
-    ports:
-      # These ports are in format <host-port>:<container-port>
-      - '80:80' # Public HTTP Port
-      - '443:443' # Public HTTPS Port
-      - '81:81' # Admin Web Port
-      # Add any other Stream port you want to expose
-      - '3646:3646' # Gitlab SSH Port
+    proxy-manager:
+        image: jc21/nginx-proxy-manager:latest
+        container_name: proxy-manager
+        restart: unless-stopped
+        ports:
+            # These ports are in format <host-port>:<container-port>
+            - "80:80" # Public HTTP Port
+            - "443:443" # Public HTTPS Port
+            - "81:81" # Admin Web Port
+            # Add any other Stream port you want to expose
 
-    environment:
-      # Uncomment this if you want to change the location of
-      # the SQLite DB file within the container
-      # DB_SQLITE_FILE: "/data/database.sqlite"
-      PUID: 1000
-      PGID: 1000
+        environment:
+            # Uncomment this if you want to change the location of
+            # the SQLite DB file within the container
+            # DB_SQLITE_FILE: "/data/database.sqlite"
+            PUID: 1000
+            PGID: 1000
 
-      # Uncomment this if IPv6 is not enabled on your host
-      DISABLE_IPV6: 'true'
+            # Uncomment this if IPv6 is not enabled on your host
+            DISABLE_IPV6: "true"
 
-    networks:
-      frontend:
+        networks:
+            frontend:
 
-    volumes:
-      - $NGINX_PROXY_MANAGER_HOME/data:/data
-      - $NGINX_PROXY_MANAGER_HOME/letsencrypt:/etc/letsencrypt
+        volumes:
+            - $NGINX_PROXY_MANAGER_HOME/data:/data
+            - $NGINX_PROXY_MANAGER_HOME/letsencrypt:/etc/letsencrypt
 
-    healthcheck:
-      test: [ "CMD", "/usr/bin/check-health" ]
-      interval: 10s
-      timeout: 3s
+        healthcheck:
+            test: ["CMD", "/usr/bin/check-health"]
+            interval: 10s
+            timeout: 3s
 
 networks:
-  frontend:
-    external: true
+    frontend:
+        external: true

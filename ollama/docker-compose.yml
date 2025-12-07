@@ -1,49 +1,49 @@
 services:
-  ollama:
-    container_name: ollama
-    image: ollama/ollama:rocm
-    restart: unless-stopped
-    networks:
-      - frontend
-    group_add:
-      - 985 # video
-      - 989 # render
-    devices:
-      - /dev/kfd:/dev/kfd
-      - /dev/dri:/dev/dri
-    volumes:
-      - "$OLLAMA_HOME:/root/.ollama"
-    environment:
-      # TODO: use GPU when it will be possible (30.10.2025 it crashes from time to time)
-      # HSA_OVERRIDE_GFX_VERSION: 11.0.2
-      # AMD_LOG_LEVEL: 3
-      # OLLAMA_DEBUG: 1
-      OLLAMA_CONTEXT_LENGTH: 128000
-      # OLLAMA_KEEP_ALIVE: -1
-      OLLAMA_MAX_LOADED_MODELS: 1
+    ollama:
+        container_name: ollama
+        image: ollama/ollama:rocm
+        restart: unless-stopped
+        networks:
+            - frontend
+        group_add:
+            - 985 # video
+            - 989 # render
+        devices:
+            - /dev/kfd:/dev/kfd
+            - /dev/dri:/dev/dri
+        volumes:
+            - "$OLLAMA_HOME:/root/.ollama"
+        environment:
+            # TODO: use GPU when it will be possible (30.10.2025 it crashes from time to time)
+            HSA_OVERRIDE_GFX_VERSION: 11.0.2
+            # AMD_LOG_LEVEL: 3
+            # OLLAMA_DEBUG: 1
+            # OLLAMA_CONTEXT_LENGTH: 32000
+            # OLLAMA_KEEP_ALIVE: -1
+            OLLAMA_MAX_LOADED_MODELS: 1
 
-  searxng:
-    container_name: searxng
-    image: docker.io/searxng/searxng:latest
-    restart: unless-stopped
-    networks:
-      - frontend
-    volumes:
-      - "$SEARXNG_HOME/config:/etc/searxng"
-      - "$SEARXNG_HOME/data:/var/cache/searxng"
-    environment:
-      SEARXNG_BASE_URL: https://search.filaco.dev
+    searxng:
+        container_name: searxng
+        image: docker.io/searxng/searxng:latest
+        restart: unless-stopped
+        networks:
+            - frontend
+        volumes:
+            - "$SEARXNG_HOME/config:/etc/searxng"
+            - "$SEARXNG_HOME/data:/var/cache/searxng"
+        environment:
+            SEARXNG_BASE_URL: https://search.filaco.dev
 
-  # TODO: remove it when desktop app is ready
-  openwebui:
-    container_name: openwebui
-    image: ghcr.io/open-webui/open-webui:main
-    restart: unless-stopped
-    networks:
-      - frontend
-    volumes:
-      - "$OPENWEBUI_HOME:/app/backend/data"
+    # TODO: remove it when desktop app is ready
+    # openwebui:
+    #     container_name: openwebui
+    #     image: ghcr.io/open-webui/open-webui:main
+    #     restart: unless-stopped
+    #     networks:
+    #         - frontend
+    #     volumes:
+    #         - "$OPENWEBUI_HOME:/app/backend/data"
 
 networks:
-  frontend:
-    external: true
+    frontend:
+        external: true

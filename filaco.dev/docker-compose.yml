@@ -1,0 +1,16 @@
+services:
+    filaco-dev:
+        image: nginx:alpine
+        restart: unless-stopped
+        container_name: filaco-dev
+        ports:
+            - 3000:3000
+        volumes:
+            - $FILACO_DEV_HOME:/var/www/filaco.dev
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+        networks:
+            - frontend
+
+networks:
+    frontend:
+        external: true
