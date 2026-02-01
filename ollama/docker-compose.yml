@@ -1,7 +1,7 @@
 services:
     ollama:
         container_name: ollama
-        image: ollama/ollama:rocm
+        image: ollama/ollama:0.15.3-rocm
         restart: unless-stopped
         networks:
             - frontend
@@ -20,7 +20,7 @@ services:
             # OLLAMA_DEBUG: 1
             # OLLAMA_CONTEXT_LENGTH: 32000
             # OLLAMA_KEEP_ALIVE: -1
-            OLLAMA_MAX_LOADED_MODELS: 1
+            # OLLAMA_MAX_LOADED_MODELS: 1
 
     searxng:
         container_name: searxng
