@@ -14,7 +14,7 @@ services:
       MAX_PLAYERS: "10"
       MOTD: "FilaCo's Minecraft Server"
       TZ: "Europe/Moscow"
-      DIFFICULTY: "2"
+      DIFFICULTY: "2"      
       LEVEL: "filaco-world"
       SIMULATION_DISTANCE: "16"
       VIEW_DISTANCE: "16"

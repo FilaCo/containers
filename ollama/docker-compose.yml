@@ -35,14 +35,14 @@ services:
             SEARXNG_BASE_URL: https://search.filaco.dev
 
     # TODO: remove it when desktop app is ready
-    # openwebui:
-    #     container_name: openwebui
-    #     image: ghcr.io/open-webui/open-webui:main
-    #     restart: unless-stopped
-    #     networks:
-    #         - frontend
-    #     volumes:
-    #         - "$OPENWEBUI_HOME:/app/backend/data"
+    openwebui:
+        container_name: openwebui
+        image: ghcr.io/open-webui/open-webui:main
+        restart: unless-stopped
+        networks:
+            - frontend
+        volumes:
+            - "$OPENWEBUI_HOME:/app/backend/data"
 
 networks:
     frontend:
