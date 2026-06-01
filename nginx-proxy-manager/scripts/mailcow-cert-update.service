@@ -1,0 +1,8 @@
+[Unit]
+Description=Update Mailcow SSL cert
+
+[Service]
+Type=oneshot
+ExecStart=/home/filaco/Projects/containers/nginx-proxy-manager/scripts/mailcow-cert-update.sh
+User=root
+
